@@ -16,21 +16,66 @@
         }
     },
     {
-        "model": "accounts.user",
+        "model": "vng_api_common.jwtsecret",
+        "pk": 3,
+        "fields": {
+            "identifier": "openzaak",
+            "secret": "openzaak"
+        }
+    },
+    {
+        "model": "vng_api_common.jwtsecret",
+        "pk": 4,
+        "fields": {
+            "identifier": "nrc",
+            "secret": "nrc"
+        }
+    },
+    {
+        "model": "authorizations.applicatie",
         "pk": 1,
         "fields": {
-            "password": "pbkdf2_sha256$150000$SMtRRvy97oFv$aSBEArz83ZRBj++iUbeNySumSaSwGWKtm08+aDNzAUU=",
-            "last_login": "2019-08-22T12:21:44.435Z",
-            "is_superuser": true,
-            "username": "test",
-            "first_name": "",
-            "last_name": "",
-            "email": "test@test.nl",
-            "is_staff": true,
-            "is_active": true,
-            "date_joined": "2019-08-22T08:31:47.563Z",
-            "groups": [],
-            "user_permissions": []
+            "uuid": "4223b169-ebc7-4410-900f-0ea2bf75dd83",
+            "client_ids": "[\"zgw_api_tests\"]",
+            "label": "zgw api tests",
+            "heeft_alle_autorisaties": true
+        }
+    },
+    {
+        "model": "authorizations.applicatie",
+        "pk": 2,
+        "fields": {
+            "uuid": "5ad64444-433d-41f4-a08a-a76fb0ad8d71",
+            "client_ids": "[\"nrc\"]",
+            "label": "nrc",
+            "heeft_alle_autorisaties": true
+        }
+    },
+    {
+        "model": "vng_api_common.apicredential",
+        "pk": 1,
+        "fields": {
+            "api_root": "http://notifications:8000/api/v1/",
+            "label": "notificaties",
+            "client_id": "openzaak",
+            "secret": "openzaak",
+            "user_id": "openzaak",
+            "user_representation": "OpenZaak"
+        }
+    },
+    {
+        "model": "notifications.notificationsconfig",
+        "pk": 1,
+        "fields": {
+            "api_root": "http://notifications:8000/api/v1/"
+        }
+    },
+    {
+        "model": "sites.site",
+        "pk": 1,
+        "fields": {
+            "domain": "localhost:8000",
+            "name": "localhost:8000"
         }
     }
 ]
