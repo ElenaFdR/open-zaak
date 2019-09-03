@@ -7,13 +7,27 @@ services:
     # environment:
     #   - POSTGRES_USER=${PG_USER:zrc}
     #   - POSTGRES_PASSWORD=${PG_PASSWORD:zrc}
+  redis:
+    image: redis
+  # notifications:
+  #   image: vngr/notificaties-api:develop
+  #   environment:
+  #     - DJANGO_SETTINGS_MODULE=nrc.conf.docker
+  #     - SECRET_KEY=${SECRET_KEY}
+  #   ports:
+  #     - 8001:8000
+  #   depends_on:
+  #     - db
   web:
     build: .
     container_name: 'openzaak_web'
     environment:
       - DJANGO_SETTINGS_MODULE=openzaak.conf.docker
-      - SECRET_KEY=${SECRET_KEY}
-      # - FIXTURES_DIR=/app/fixtures
+      - SECRET_KEY=${SECRET_KEY:-7(h1r2hk)8z9+05edulo_3qzymwbo&c24=)qz7+_@3&2sp=u%i}
+      - IS_HTTPS=no
+      - ALLOWED_HOSTS=*
+      - CACHE_DEFAULT=redis:6379/0
+      - CACHE_AXES=redis:6379/0
     ports:
       - 8000:8000
     depends_on:
