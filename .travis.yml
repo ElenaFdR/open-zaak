@@ -11,48 +11,48 @@ env:
 
 jobs:
   include:
-    - stage: Tests
-      name: Django tests
-      services:
-        - postgresql
-        - docker
-      addons:
-        postgresql: "10"
-        apt:
-          packages:
-          - postgresql-10-postgis-2.4
-      env:
-        - DJANGO_SETTINGS_MODULE=openzaak.conf.ci
-      before_install:
-        - sudo apt-get update
-        - sudo apt-get install libgdal-dev gdal-bin
-        - gdal-config --version
-      install:
-        - pip install -r requirements/ci.txt
-        - pip install codecov
-        - npm ci
-        - npm run build
-      before_script:
-        - psql -U postgres -c "create extension postgis"
-      script:
-        - python src/manage.py collectstatic --noinput --link
-        - coverage run src/manage.py test src
-      after_success:
-        - codecov
+    # - stage: Tests
+    #   name: Django tests
+    #   services:
+    #     - postgresql
+    #     - docker
+    #   addons:
+    #     postgresql: "10"
+    #     apt:
+    #       packages:
+    #       - postgresql-10-postgis-2.4
+    #   env:
+    #     - DJANGO_SETTINGS_MODULE=openzaak.conf.ci
+    #   before_install:
+    #     - sudo apt-get update
+    #     - sudo apt-get install libgdal-dev gdal-bin
+    #     - gdal-config --version
+    #   install:
+    #     - pip install -r requirements/ci.txt
+    #     - pip install codecov
+    #     - npm ci
+    #     - npm run build
+    #   before_script:
+    #     - psql -U postgres -c "create extension postgis"
+    #   script:
+    #     - python src/manage.py collectstatic --noinput --link
+    #     - coverage run src/manage.py test src
+    #   after_success:
+    #     - codecov
 
-    - name: isort
-      install: pip install isort
-      script: isort --recursive --check-only --diff .
+    # - name: isort
+    #   install: pip install isort
+    #   script: isort --recursive --check-only --diff .
 
-    - name: black
-      install: pip install black
-      script: black --check src
+    # - name: black
+    #   install: pip install black
+    #   script: black --check src
 
-    - name: Test docker image build
-      before_install: skip
-      install: skip
-      before_script: skip
-      script: docker build .
+    # - name: Test docker image build
+    #   before_install: skip
+    #   install: skip
+    #   before_script: skip
+    #   script: docker build .
 
     - stage: Newman tests
       name: ZGW api tests
